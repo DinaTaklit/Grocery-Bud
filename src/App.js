@@ -15,10 +15,19 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
   }
+
+  const showAlert = (show=false, type='', msg='') => {
+    setAlert({
+      show,
+      type,
+      msg
+    })
+  }
+
   return (
     <section className="section-center">
       <from className="grocery-from" onSubmit={handleSubmit}>
-        {alert.show && <Alert {...alert}/>}
+        {alert.show && <Alert {...alert} showAlert={showAlert} list={list}/>}
         <h3>grocery bud</h3>
         <div className="form-control">
           <input 
