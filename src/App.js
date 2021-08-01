@@ -5,6 +5,11 @@ import Alert from './Alert'
 function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
+  const [alert, setAlert] = useState( {
+    show: false,
+    type: '',
+    msg: ''
+  })
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -12,6 +17,7 @@ function App() {
   return (
     <section className="section-center">
       <from className="grocery-from" onSubmit={handleSubmit}>
+        {alert.show && <Alert {...alert}/>}
         <h3>grocery bud</h3>
         <div className="form-control">
           <input 
