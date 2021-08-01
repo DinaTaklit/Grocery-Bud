@@ -5,6 +5,7 @@ import Alert from './Alert'
 function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
+  const [list, setList] = useState([])
   const [alert, setAlert] = useState( {
     show: false,
     type: '',
@@ -32,6 +33,14 @@ function App() {
           </button>
         </div>
       </from>
+      {
+        list.length > 0 && (
+          <div className="grocery-container">
+            <List list={list}/>
+            <button className='clear-btn'>clear items</button>
+          </div>
+        )
+      }
     </section>
   )
 }
