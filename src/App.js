@@ -4,6 +4,7 @@ import Alert from './Alert'
 
 function App() {
   const [name, setName] = useState("")
+  const [isEditing, setIsEditing] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -21,7 +22,7 @@ function App() {
             onChange={(event) => {setName(event.target.value)}}
           />
           <button type="submit" className="submit-btn">
-            Submit
+            {isEditing ? 'Edit' : 'Submit'}
           </button>
         </div>
       </from>
