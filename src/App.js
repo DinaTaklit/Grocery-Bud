@@ -5,7 +5,7 @@ import Alert from './Alert'
 function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
-  const [list, setList] = useState([{id:"1", title:"first Item"}])
+  const [list, setList] = useState([])
   const [alert, setAlert] = useState( {
     show: false,
     type: '',
@@ -14,8 +14,28 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    if(!name) {
+      showAlert(true, 'danger', 'Name is required')
+    } else if (name && isEditing) {
+      showAlert(true, 'success', `${name} is updated`)
+      setIsEditing(false)
+    } else {
+      // Add new item
+      AddItem()
+    }
   }
 
+  // Function that add new item to the list
+  const AddItem = () => {
+    const newItem = {
+      id: new Date().getTime().toString,
+      title: name
+    }
+    setList([...list, newItem])
+    showAlert(true, 'success', `${name} is created`)
+    setName("")
+  }
+  
   const showAlert = (show=false, type='', msg='') => {
     setAlert({
       show,
@@ -26,7 +46,8 @@ function App() {
 
   return (
     <section className="section-center">
-      <from className="grocery-from" onSubmit={handleSubmit}>
+      <form className="grocery-from" onSubmit={handleSubmit}>
+        {console.log(alert.show)}
         {alert.show && <Alert {...alert} showAlert={showAlert} list={list}/>}
         <h3>grocery bud</h3>
         <div className="form-control">
@@ -41,7 +62,7 @@ function App() {
             {isEditing ? 'Edit' : 'Submit'}
           </button>
         </div>
-      </from>
+      </form>
       {
         list.length > 0 && (
           <div className="grocery-container">
