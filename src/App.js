@@ -13,6 +13,12 @@ function App() {
     msg: ''
   })
 
+  // Save the list of item in the local Storage
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list))
+  }, [list])
+
+  // Functon that handle the Submit button
   const handleSubmit = (event) => {
     event.preventDefault()
     if(!name) {
