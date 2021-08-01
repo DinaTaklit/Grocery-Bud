@@ -54,6 +54,12 @@ function App() {
     setName(itemEdit.title)
   }
 
+  // Function that delete item with the given id
+  const removeItem = (id) => {
+    setList(list.filter(item => item.id !== id))
+    showAlert(true, 'danger', `item is removed`)
+  }
+
   const showAlert = (show=false, type='', msg='') => {
     setAlert({
       show,
@@ -84,7 +90,7 @@ function App() {
       {
         list.length > 0 && (
           <div className="grocery-container">
-            <List list={list} editItem={editItem}/>
+            <List list={list} editItem={editItem} removeItem={removeItem}/>
             <button className='clear-btn'>clear items</button>
           </div>
         )
