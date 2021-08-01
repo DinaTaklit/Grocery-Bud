@@ -5,7 +5,7 @@ import Alert from './Alert'
 function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
-  const [list, setList] = useState([])
+  const [list, setList] = useState([{id:"1", title:"first Item"}])
   const [alert, setAlert] = useState( {
     show: false,
     type: '',
