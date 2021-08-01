@@ -60,6 +60,13 @@ function App() {
     showAlert(true, 'danger', `item is removed`)
   }
 
+  // Function that clear the list of items
+  const clearList = () => {
+    showAlert(true, 'danger', 'List is removed')
+    setList([])
+  }
+
+  // Function that show alert
   const showAlert = (show=false, type='', msg='') => {
     setAlert({
       show,
@@ -91,7 +98,7 @@ function App() {
         list.length > 0 && (
           <div className="grocery-container">
             <List list={list} editItem={editItem} removeItem={removeItem}/>
-            <button className='clear-btn'>clear items</button>
+            <button className='clear-btn' onClick={clearList}>clear items</button>
           </div>
         )
       }
