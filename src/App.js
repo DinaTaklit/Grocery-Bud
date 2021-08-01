@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react'
 import List from './List'
 import Alert from './Alert'
 
+// Function that get the list from the local Storage
+const getList = () => {
+  const list = localStorage.getItem('list')
+  if(list) {
+    return JSON.parse(list)
+  }
+  return []
+}
+
 function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
-  const [list, setList] = useState([])
+  const [list, setList] = useState(getList)
   const [itemID, setItemID] = useState(null)
   const [alert, setAlert] = useState( {
     show: false,
