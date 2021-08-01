@@ -6,6 +6,7 @@ function App() {
   const [name, setName] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [list, setList] = useState([])
+  const [itemID, setItemID] = useState(null)
   const [alert, setAlert] = useState( {
     show: false,
     type: '',
@@ -17,8 +18,17 @@ function App() {
     if(!name) {
       showAlert(true, 'danger', 'Name is required')
     } else if (name && isEditing) {
-      showAlert(true, 'success', `${name} is updated`)
+      // Edit the item with the given id
+      setList(list.map((item) => {
+        if(item.id === itemID) {
+          return { ...item, title: name }
+        }
+        return item
+      }))
+      setName('')
+      setItemID(null)
       setIsEditing(false)
+      showAlert(true, 'success', `name is updated`)
     } else {
       // Add new item
       AddItem()
@@ -28,14 +38,22 @@ function App() {
   // Function that add new item to the list
   const AddItem = () => {
     const newItem = {
-      id: new Date().getTime().toString,
+      id: new Date().getTime().toString(),
       title: name
     }
     setList([...list, newItem])
     showAlert(true, 'success', `${name} is created`)
     setName("")
   }
-  
+
+  // Function that edit item with the given id
+  const editItem = (id) => {
+    const itemEdit = list.find(item => item.id === id)
+    setIsEditing(true)
+    setItemID(id)
+    setName(itemEdit.title)
+  }
+
   const showAlert = (show=false, type='', msg='') => {
     setAlert({
       show,
@@ -66,7 +84,7 @@ function App() {
       {
         list.length > 0 && (
           <div className="grocery-container">
-            <List list={list}/>
+            <List list={list} editItem={editItem}/>
             <button className='clear-btn'>clear items</button>
           </div>
         )
