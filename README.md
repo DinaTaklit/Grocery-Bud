@@ -1,5 +1,7 @@
 # Grocery Bud
 
+- Live Preview: https://dinataklit.github.io/Grocery-Bud/
+
 This is a simple application that:
 
 - Add new items to a list
