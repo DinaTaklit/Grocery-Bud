@@ -3,7 +3,30 @@ import List from './List'
 import Alert from './Alert'
 
 function App() {
-  return <h2>grocery bud setup</h2>
+  const [name, setName] = useState("")
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  }
+  return (
+    <section className="section-center">
+      <from className="grocery-from" onSubmit={handleSubmit}>
+        <h3>grocery bud</h3>
+        <div className="form-control">
+          <input 
+            type="text"
+            className="grocery" 
+            placeholder="e.g. eggs"
+            value={name}
+            onChange={(event) => {setName(event.target.value)}}
+          />
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+        </div>
+      </from>
+    </section>
+  )
 }
 
 export default App
